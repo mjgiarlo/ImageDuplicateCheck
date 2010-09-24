@@ -4,7 +4,6 @@ date: 2010-09-14
 file: checkdupe.py
 """
 
-import sys
 import os
 import glob
 import Image
@@ -58,7 +57,7 @@ def check_images(path):
 
 def main():
     import optparse
-    parser = optparse.OptionParser("Usage: %prog /path/to/directory")
+    parser = optparse.OptionParser("Usage: %prog [options] /path/to/directory")
     parser.add_option("-v", dest="verbose", action="store_true", default=False,
                       help="verbose output")
     options, args = parser.parse_args()
@@ -67,7 +66,7 @@ def main():
          parser.print_help()
          return
                           
-    path = sys.argv[1]
+    path = args[0]
  
     if os.path.isdir(path):
         if options.verbose:
