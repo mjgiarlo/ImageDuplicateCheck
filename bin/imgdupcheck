@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+
+import imgdupcheck
+
+if __name__ == '__main__':
+   imgdupcheck.main()

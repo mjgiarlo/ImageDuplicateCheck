@@ -1,0 +1,7 @@
+#*
+*#
+.#*
+*~
+*.pyc
+imgdupcheck.egg-info
+dist
