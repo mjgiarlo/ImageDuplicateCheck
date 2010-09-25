@@ -27,15 +27,11 @@ def check_images(path, quiet=True):
     """
     # loop over files in directory to look at
     for filename in glob.glob(os.path.join(path, '*.*')): 
-        if not quiet:
-            print "Examining %s" % filename
         # get histogram to compare against the rest
         # coerce to string for easy reverse lookup
         histogram = str(Image.open(filename).histogram())
         if histogram in histogram_map:
             histogram_map[histogram].append(filename)
-            if not quiet:
-                print "Duplicates\n%s" % "\t".join(histogram_map[histogram])
         else:
             histogram_map[histogram] = [filename]
     if not quiet:
@@ -57,11 +53,6 @@ def main():
     path = args[0]
  
     if os.path.isdir(path):
-        if not options.quiet:
-            print "Checking for duplicate images in:\n%s\n" % path 
         check_images(path, options.quiet)
     else:
         raise Exception("%s is not a directory" % path)
-        
-    if not options.quiet:
-        print "done."

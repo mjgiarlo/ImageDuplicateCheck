@@ -1,0 +1,45 @@
+h1. ImageDuplicateCheck
+
+Check a directory for duplicate images.  If a duplicate image
+is found, it will spit out the names of both images.  This does not do 
+recursive directory traversing; it only checks the directory given.
+
+
+h2. Code
+
+<pre>
+  """ python """
+  import imgdupcheck
+
+  duplicates = imgdupcheck.check_images('/home/me/images')
+  for dupset in duplicates:
+      imgpaths = " ".join(dupset)
+      print "These are all the same image: %s" % imgpaths
+          
+  import Image
+
+  img1 = Image.open('py-orig.png')
+  img2 = Image.open('py-copy.png')
+  if imgdupcheck.is_same_image(img1, img2):
+      do_something()
+</pre>
+
+h2. Command-line usage
+
+<pre>
+  $ bin/imgdupcheck ./test/
+  ./test/py-copy-2.png  ./test/py-orig.png	./test/py-copy.png
+  ./test/py-2-copy.png  ./test/py-2.png
+</pre>
+
+h2. Testing
+
+<pre>
+  python setup.py test
+</pre>
+
+h2. Installation (may require administrative privileges)
+
+<pre>
+  python setup.py install
+</pre>
