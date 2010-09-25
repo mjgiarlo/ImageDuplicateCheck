@@ -1,8 +1,6 @@
 h1. ImageDuplicateCheck
 
-Check a directory for duplicate images.  If a duplicate image
-is found, it will spit out the names of both images.  This does not do 
-recursive directory traversing; it only checks the directory given.
+Check a directory for duplicate images.  If a duplicate image is found, it will spit out the names of both images.  This does not do recursive directory traversing; it only checks the directory given.
 
 
 h2. Code
