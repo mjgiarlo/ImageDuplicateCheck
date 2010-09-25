@@ -9,10 +9,6 @@ import glob
 import Image
 
 
-histogram_map = {
-    # '[0, "..."]': ['file1', 'file2'],
-}
-
 def is_same_image(image1, image2):
     """ Takes two image files and compares them to see if they are the same both
     arguments expect to be created from the result of: 
@@ -25,19 +21,27 @@ def check_images(path, quiet=True):
     determine if there are any duplicates.  If so, paths to both files are 
     printed
     """
+    histogram_map = {
+        # '[0, "..."]': ['file1', 'file2'],
+        }
     # loop over files in directory to look at
     for filename in glob.glob(os.path.join(path, '*.*')): 
         # get histogram to compare against the rest
         # coerce to string for easy reverse lookup
-        histogram = str(Image.open(filename).histogram())
+        try:
+            histogram = str(Image.open(filename).histogram())
+        except IOError:
+            # not an Image -- skip it
+            continue
         if histogram in histogram_map:
             histogram_map[histogram].append(filename)
         else:
             histogram_map[histogram] = [filename]
+    duplicates = [l for l in histogram_map.values() if len(l) > 1]
     if not quiet:
-        for duplicates in histogram_map.values():
-            print "\t".join(duplicates)
-    return histogram_map.values()
+        for duplicate in duplicates:
+            print "\t".join(duplicate)
+    return duplicates
         
 def main():
     import optparse
