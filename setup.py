@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 setup(
     name = 'imgdupcheck',
     version = '0.0.1',
-    description = "fork of a tool that looks for duplicate images",
+    description = "a tool that looks for duplicate images",
     author = "Mike G.",
     author_email = "leftwing@alumni.rutgers.edu",
     url = "http://github.com/mjgiarlo/ImageDuplicateCheck",

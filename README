@@ -1,13 +1,16 @@
-this script will check a directory for duplicate images.  If a duplicate image is found, it will spit out the names of both images.  This does not do recursive directory traversing, it only checks the directory given                                                                                                                                                        
-Installation:
+this script will check a directory for duplicate images.  If a duplicate image
+is found, it will spit out the names of both images.  This does not do 
+recursive directory traversing, it only checks the directory given
 
-  easy_install imgdupcheck
-
-Test:
+Testing:
 
   python setup.py test
 
+Installation (may require administrative privileges)
+
+  python setup.py install
+
 Usage:
 
-  imgdupcheck /path/to/directory/
+  imgdupcheck -v /path/to/directory/
 
