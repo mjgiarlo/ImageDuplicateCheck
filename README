@@ -12,5 +12,5 @@ Installation (may require administrative privileges)
 
 Usage:
 
-  imgdupcheck -v /path/to/directory/
+  imgdupcheck /path/to/directory/
 
