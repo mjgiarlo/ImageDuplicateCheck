@@ -28,9 +28,8 @@ def check_images(path, quiet=True, recursive=False):
     if recursive:
         fileset = []
         for root, dirs, files in os.walk(path):
-            if files:
-                for f in files:
-                    fileset.append(os.path.join(root, f))
+            for f in files:
+                fileset.append(os.path.join(root, f))
     else:
         fileset = glob.glob(os.path.join(path, '*.*'))
 
