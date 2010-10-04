@@ -16,7 +16,7 @@ def is_same_image(image1, image2):
     return image1.histogram() == image2.histogram()
 
 
-def check_images(path, quiet=True):
+def check_images(path, quiet=True, recursive=False):
     """ Takes a path to a directory and checks each file against each other to
     determine if there are any duplicates.  If so, paths to both files are
     printed
@@ -25,7 +25,16 @@ def check_images(path, quiet=True):
         # '[0, "..."]': ['file1', 'file2'],
         }
     # loop over files in directory to look at
-    for filename in glob.glob(os.path.join(path, '*.*')):
+    if recursive:
+        fileset = []
+        for root, dirs, files in os.walk(path):
+            if files:
+                for f in files:
+                    fileset.append(os.path.join(root, f))
+    else:
+        fileset = glob.glob(os.path.join(path, '*.*'))
+
+    for filename in fileset:
         # get histogram to compare against the rest
         # coerce to string for easy reverse lookup
         try:
@@ -49,6 +58,8 @@ def main():
     parser = optparse.OptionParser("Usage: %prog [options] /path/to/directory")
     parser.add_option("-q", dest="quiet", action="store_true", default=False,
                       help="quiet output")
+    parser.add_option("-r", dest="recursive", action="store_true",
+                      default=False, help="recursively search for images")
     options, args = parser.parse_args()
 
     if len(args) != 1:
@@ -58,6 +69,6 @@ def main():
     path = args[0]
 
     if os.path.isdir(path):
-        check_images(path, options.quiet)
+        check_images(path, options.quiet, options.recursive)
     else:
         raise Exception("%s is not a directory" % path)

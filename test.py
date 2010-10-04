@@ -16,6 +16,12 @@ class ImgdupcheckTests(unittest.TestCase):
         self.othercopy = Image.open(os.path.join(TESTDIR,
                                                  'dups',
                                                  'py-2-copy.png'))
+        self.nodupsorig = Image.open(os.path.join(TESTDIR,
+                                                  'nodups',
+                                                  'py-orig.png'))
+        self.nodupsother = Image.open(os.path.join(TESTDIR,
+                                                   'nodups',
+                                                   'py-2.png'))
 
     def test_orig_and_copy_same(self):
         self.assertTrue(imgdupcheck.is_same_image(self.orig, self.copy))
@@ -42,3 +48,18 @@ class ImgdupcheckTests(unittest.TestCase):
         self.assertTrue(len(dupset_other) == 2)
         self.assertEqual(dupset_other, set([self.other.filename,
                                             self.othercopy.filename]))
+
+    def test_recursive_check(self):
+        dups = imgdupcheck.check_images(TESTDIR, recursive=True)
+        self.assertTrue(len(dups) == 2)
+        dupset_orig = set(dups[0])
+        self.assertTrue(len(dupset_orig) == 4)
+        self.assertEqual(dupset_orig, set([self.orig.filename,
+                                           self.copy.filename,
+                                           self.copy2.filename,
+                                           self.nodupsorig.filename]))
+        dupset_other = set(dups[1])
+        self.assertTrue(len(dupset_other) == 3)
+        self.assertEqual(dupset_other, set([self.other.filename,
+                                            self.othercopy.filename,
+                                            self.nodupsother.filename]))
