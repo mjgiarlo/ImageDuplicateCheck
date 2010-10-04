@@ -3,5 +3,4 @@
 import imgdupcheck
 
 if __name__ == '__main__':
-   imgdupcheck.main()
-
+    imgdupcheck.main()

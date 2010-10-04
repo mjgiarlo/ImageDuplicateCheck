@@ -14,5 +14,4 @@ setup(
     py_modules = ['imgdupcheck', 'ez_setup'],
     test_suite = 'test',
     scripts = ['bin/imgdupcheck'],
-    requires = ["Image"]
-)
+    requires = ["Image"])
